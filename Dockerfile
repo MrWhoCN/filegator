@@ -53,6 +53,9 @@ RUN sed -ri -e 's!80!${APACHE_PORT}!g' /etc/apache2/ports.conf
 RUN sed -ri -e 's!80!${APACHE_PORT}!g' /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
+# Add ServerName to avoid warnings
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 EXPOSE ${APACHE_PORT}
 
 USER www-data
